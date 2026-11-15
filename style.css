@@ -1,0 +1,193 @@
+/* 색은 세 가지만 씁니다: 배경(흰색), 글자(검정), 포인트(파랑) */
+:root {
+  --bg: #ffffff;
+  --ink: #1a1a1a;
+  --point: #1f4fd8;
+  --serif: 'Noto Serif KR', 'AppleMyungjo', serif;
+}
+
+@font-face {
+  font-family: 'Noto Serif KR';
+  src: url('fonts/NotoSerifKR-subset.woff2') format('woff2');
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+* { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0 auto;
+  max-width: 600px;
+  min-height: 100dvh;
+  padding: 0 20px;
+  padding-left: max(20px, env(safe-area-inset-left));
+  padding-right: max(20px, env(safe-area-inset-right));
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--serif);
+  font-size: 16px;
+  line-height: 1.75;
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+}
+
+button, textarea {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: 0;
+  border-radius: 0;
+  padding: 0;
+  margin: 0;
+  -webkit-appearance: none;
+  appearance: none;
+}
+button { cursor: pointer; -webkit-tap-highlight-color: transparent; }
+button:focus-visible, textarea:focus-visible { outline: 2px solid var(--point); outline-offset: 2px; }
+
+p, h1, h2, ol { margin: 0; padding: 0; }
+
+/* 머리말 */
+.top {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: calc(14px + env(safe-area-inset-top)) 0 8px;
+  border-bottom: 1px solid var(--ink);
+  font-size: 13px;
+}
+.top .title { font-weight: 700; }
+
+main { padding: 28px 0 96px; }
+
+/* 아래 메뉴 */
+.tabs {
+  position: fixed;
+  left: 0; right: 0; bottom: 0;
+  display: flex;
+  justify-content: center;
+  background: var(--bg);
+  border-top: 1px solid var(--ink);
+  padding-bottom: env(safe-area-inset-bottom);
+}
+.tabs button {
+  flex: 0 1 200px;
+  padding: 13px 0 12px;
+  font-size: 14px;
+}
+.tabs button[aria-current="page"] { color: var(--point); font-weight: 700; }
+
+/* 작은 꼬리표: 관점 유형, 구분 제목 */
+.pos { color: var(--point); font-size: 12px; font-weight: 400; white-space: nowrap; }
+.label { font-size: 12px; color: var(--point); margin-bottom: 2px; }
+
+h1.page { font-size: 22px; font-weight: 700; line-height: 1.35; margin-bottom: 4px; }
+.note { font-size: 13px; margin-bottom: 20px; }
+
+/* 오늘의 명언 */
+.today .word { font-size: 27px; font-weight: 700; line-height: 1.3; margin: 2px 0 12px; letter-spacing: -0.3px; }
+.orig { padding-left: 12px; border-left: 2px solid var(--point); }
+.src { font-size: 13px; margin-top: 8px; }
+.text-btn { color: var(--point); font-size: 14px; font-weight: 700; padding: 10px 0; }
+
+/* 고민 입력 */
+.ask { margin-top: 36px; }
+.ask label { display: block; font-size: 13px; margin-bottom: 6px; }
+.ask textarea {
+  display: block;
+  width: 100%;
+  min-height: 84px;
+  padding: 10px 0;
+  border-top: 1px solid var(--ink);
+  border-bottom: 1px solid var(--ink);
+  resize: none;
+  font-size: 16px;
+  line-height: 1.7;
+}
+.ask textarea::placeholder { color: var(--ink); opacity: 1; font-size: 14px; }
+.ask textarea:focus { outline: none; border-color: var(--point); }
+.main-btn {
+  display: block;
+  width: 100%;
+  margin-top: 12px;
+  padding: 12px 0;
+  background: var(--ink);
+  color: var(--bg);
+  font-weight: 700;
+}
+.line-btn {
+  display: block;
+  width: 100%;
+  margin-top: 12px;
+  padding: 11px 0;
+  border: 1px solid var(--ink);
+}
+.error { color: var(--point); font-size: 13px; margin-top: 6px; min-height: 1.75em; }
+
+/* 사전 항목처럼 보이는 명언 목록 */
+.worry { margin-bottom: 20px; }
+.worry .text { font-size: 18px; font-weight: 700; line-height: 1.5; }
+.entries { border-bottom: 1px solid var(--ink); }
+.entry { border-top: 1px solid var(--ink); }
+.entry-head {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  width: 100%;
+  padding: 14px 0;
+  text-align: left;
+}
+.entry-head .num { flex: none; width: 1.3em; font-weight: 700; }
+.entry-head .word { font-size: 18px; font-weight: 700; line-height: 1.4; }
+.entry-head .pos { margin-left: auto; padding-left: 8px; }
+.entry-head .mark { color: var(--point); font-size: 12px; white-space: nowrap; }
+
+/* 열고 닫는 움직임 (앱에서 유일한 애니메이션) */
+.entry-body {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.22s ease;
+}
+.entry.open .entry-body { grid-template-rows: 1fr; }
+.entry-body > .inner { overflow: hidden; min-height: 0; visibility: hidden; }
+.entry.open .entry-body > .inner { visibility: visible; }
+.entry-body .pad { padding: 0 0 18px 1.3em; margin-left: 8px; }
+.entry-body .label { margin-top: 16px; }
+.entry-body ol { list-style: none; }
+.entry-body ol li { margin-top: 4px; }
+.fav-btn {
+  margin-top: 18px;
+  padding: 7px 12px;
+  border: 1px solid var(--point);
+  color: var(--point);
+  font-size: 13px;
+}
+.fav-btn[aria-pressed="true"] { background: var(--point); color: var(--bg); }
+
+@media (prefers-reduced-motion: reduce) {
+  .entry-body { transition: none; }
+}
+
+/* 주제 버튼 */
+.topics { display: flex; flex-wrap: wrap; gap: 8px 14px; margin-top: 14px; }
+.topics button { color: var(--point); padding: 6px 0; border-bottom: 1px solid var(--point); font-size: 15px; }
+
+/* 기록 */
+.log { margin-bottom: 32px; }
+.log-head { display: flex; justify-content: space-between; align-items: baseline; font-size: 12px; }
+.log-head button { color: var(--point); padding: 6px 0 6px 12px; }
+.log .text { font-weight: 700; margin: 2px 0 10px; }
+.log .entry-head .word { font-size: 16px; }
+
+.empty { padding: 24px 0; }
+
+@media (min-width: 700px) {
+  body { font-size: 17px; }
+  main { padding-top: 40px; }
+  .today .word { font-size: 32px; }
+}
+
+.worry .read { font-size: 13px; margin-top: 6px; color: var(--point); }
