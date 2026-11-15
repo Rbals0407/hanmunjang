@@ -215,5 +215,9 @@ async function recommend(worry, quotes, options = {}) {
     items.push(...pickMixed(same, COUNT - items.length));
   }
 
+  // 고른 명언을 가장 잘 맞는 것부터 보여주도록 점수 순으로 놓습니다.
+  const scoreOf = Object.fromEntries(scored.map(x => [x.q.id, x.score]));
+  items.sort((a, b) => (scoreOf[b.id] || 0) - (scoreOf[a.id] || 0));
+
   return { items, weak: false, understood: types.names };
 }

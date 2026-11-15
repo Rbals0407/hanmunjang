@@ -4,31 +4,56 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>오늘의 한 문장</title>
-  <meta name="description" content="고민을 쓰면 출처가 확인된 명언 다섯 개를 찾아줍니다.">
-  <meta name="theme-color" content="#ffffff">
+  <meta name="description" content="고민을 물으면 출처가 확인된 명언을 한 번에 하나씩 답해주는 소라.">
+  <meta name="theme-color" content="#071a2b">
   <link rel="manifest" href="manifest.webmanifest">
   <link rel="apple-touch-icon" href="icons/icon-180.png">
   <link rel="icon" href="icons/icon-192.png">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-title" content="한 문장">
-  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <link rel="preload" href="fonts/NotoSerifKR-subset.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header class="top">
-    <button class="title" data-nav="home">오늘의 한 문장</button>
-    <span class="date" id="today-date"></span>
-  </header>
+  <!-- 배경에 깔리는 은은한 빛 두 덩이 -->
+  <div class="glow glow-a" aria-hidden="true"></div>
+  <div class="glow glow-b" aria-hidden="true"></div>
 
-  <main id="view" aria-live="polite"></main>
+  <div class="stage is-ask" id="stage">
+    <div class="scroll" id="scroll">
+      <header class="top">
+        <button class="quiet" id="today-btn">오늘의 한 문장</button>
+        <div class="dots" id="dots" aria-label="몇 번째 답인지"></div>
+      </header>
 
-  <nav class="tabs" aria-label="메뉴">
-    <button data-nav="home">찾기</button>
-    <button data-nav="fav">즐겨찾기</button>
-    <button data-nav="history">기록</button>
-  </nav>
+      <!-- 직접 그린 소라. 색은 모래색·진주색·바다색만 씁니다. -->
+      <div class="shell-wrap" id="shell" aria-hidden="true">
+        <div class="halo"></div>
+        <svg class="shell" viewBox="0 0 200 200">
+          <ellipse cx="74" cy="15" rx="10" ry="7" fill="#c7ae86"/>
+          <ellipse cx="78" cy="28" rx="21" ry="12" fill="#d9c3a0"/>
+          <ellipse cx="85" cy="47" rx="35" ry="18" fill="#c7ae86"/>
+          <path d="M100 43 C151 43 181 83 177 125 C173 163 141 185 104 183 C63 181 35 153 35 114 C35 72 61 43 100 43 Z" fill="#d9c3a0"/>
+          <path d="M60 61 C83 54 109 54 132 63" fill="none" stroke="#0b2233" stroke-width="1.6" stroke-linecap="round" opacity="0.4"/>
+          <path d="M48 101 C77 72 129 70 169 99" fill="none" stroke="#0b2233" stroke-width="1.6" stroke-linecap="round" opacity="0.4"/>
+          <path d="M40 127 C63 98 95 91 121 97" fill="none" stroke="#0b2233" stroke-width="1.6" stroke-linecap="round" opacity="0.4"/>
+          <path d="M52 156 C62 140 78 131 92 130" fill="none" stroke="#0b2233" stroke-width="1.6" stroke-linecap="round" opacity="0.4"/>
+          <path d="M152 76 C180 100 178 152 132 180 C110 186 94 170 101 147 C108 121 129 95 152 76 Z" fill="#efeae0"/>
+          <path d="M149 97 C165 116 162 147 130 166 C117 170 109 160 114 146 C120 126 134 109 149 97 Z" fill="#0b2233"/>
+        </svg>
+      </div>
+
+      <main id="view" aria-live="polite"></main>
+    </div>
+
+    <nav class="tabs" aria-label="메뉴">
+      <button data-nav="home">묻기</button>
+      <button data-nav="fav">즐겨찾기</button>
+      <button data-nav="history">기록</button>
+    </nav>
+  </div>
 
   <script src="recommend.js"></script>
   <script src="app.js"></script>

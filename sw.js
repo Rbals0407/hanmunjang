@@ -3,7 +3,7 @@
   저장해 둔 파일을 먼저 보여주고, 인터넷이 되면 뒤에서 새 파일로 바꿔 둡니다.
   그래서 파일을 고친 뒤에는 앱을 두 번 열어야 바뀐 내용이 보입니다.
 */
-const CACHE = 'hanmunjang-v5';
+const CACHE = 'hanmunjang-v6';
 const FILES = [
   './',
   'index.html',

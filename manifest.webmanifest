@@ -1,13 +1,13 @@
 {
   "name": "오늘의 한 문장",
   "short_name": "한 문장",
-  "description": "고민을 쓰면 출처가 확인된 명언 다섯 개를 찾아줍니다.",
+  "description": "고민을 물으면 출처가 확인된 명언을 하나씩 답해주는 소라.",
   "lang": "ko",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
-  "background_color": "#ffffff",
-  "theme_color": "#ffffff",
+  "background_color": "#071a2b",
+  "theme_color": "#071a2b",
   "icons": [
     { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png" },
     { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png" }
