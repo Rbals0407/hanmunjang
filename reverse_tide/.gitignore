@@ -1,0 +1,10 @@
+# Godot 자동 생성 캐시 (커밋 안 함)
+.godot/
+*.translation
+# 내보내기 결과물
+export/
+builds/
+*.apk
+*.aab
+# macOS
+.DS_Store
